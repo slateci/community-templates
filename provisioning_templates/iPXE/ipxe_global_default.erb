@@ -45,7 +45,7 @@ exit
 
 :discovery
 dhcp
-kernel http://<%= foreman_server_fqdn %>:${port}/httpboot/boot/fdi-image/vmlinuz0 initrd=initrd0.img rootflags=loop root=live:/fdi.iso rootfstype=auto ro rd.live.image rd.writable.fsimg=1 acpi=force rd.luks=0 rd.md=0 rd.dm=0 rd.lvm=0 rd.bootif=0 rd.neednet=0 nomodeset nokaslr proxy.url=<%= foreman_server_fqdn %> proxy.type=foreman BOOTIF=01-${net0/mac} fdi.zips=httpboot/boot/dell-omsa.zip fdi.zipserver=http://<%= foreman_server_fqdn %>:${port}
+kernel http://<%= foreman_server_fqdn %>:${port}/httpboot/boot/fdi-image/vmlinuz0 initrd=initrd0.img rootflags=loop root=live:/fdi.iso rootfstype=auto ro rd.live.image rd.writable.fsimg=1 acpi=force rd.luks=0 rd.md=0 rd.dm=0 rd.lvm=0 rd.bootif=0 rd.neednet=0 nomodeset nokaslr proxy.url=<%= foreman_server_url %> proxy.type=foreman BOOTIF=01-${net0/mac} fdi.zips=httpboot/boot/dell-omsa.zip fdi.zipserver=http://<%= foreman_server_fqdn %>:${port}
 initrd http://<%= foreman_server_fqdn %>:${port}/httpboot/boot/fdi-image/initrd0.img
 imgstat
 sleep 2
