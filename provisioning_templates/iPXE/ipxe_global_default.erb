@@ -19,7 +19,7 @@ item --key l local     Local boot (next entry)
 item shell             Drop into iPXE shell
 item reboot            Reboot system
 item
-item --key d discovery Discovery from ${next-server}:${port} (httpboot module)
+item --key d discovery Discovery from ${foreman_url}:${port} (httpboot module)
 choose --timeout ${menu-timeout} --default ${menu-default} selected || goto cancel
 set menu-timeout 0
 goto ${selected}
@@ -45,8 +45,8 @@ exit
 
 :discovery
 dhcp
-kernel http://${next-server}:${port}/httpboot/boot/fdi-image/vmlinuz0 initrd=initrd0.img rootflags=loop root=live:/fdi.iso rootfstype=auto ro rd.live.image rd.writable.fsimg=1 acpi=force rd.luks=0 rd.md=0 rd.dm=0 rd.lvm=0 rd.bootif=0 rd.neednet=0 nomodeset nokaslr proxy.url=<%= foreman_server_url %> proxy.type=foreman BOOTIF=01-${net0/mac} fdi.zips=httpboot/boot/dell-omsa.zip fdi.zipserver=http://${next-server}:${port}
-initrd http://${next-server}:${port}/httpboot/boot/fdi-image/initrd0.img
+kernel http://${foreman_url}:${port}/httpboot/boot/fdi-image/vmlinuz0 initrd=initrd0.img rootflags=loop root=live:/fdi.iso rootfstype=auto ro rd.live.image rd.writable.fsimg=1 acpi=force rd.luks=0 rd.md=0 rd.dm=0 rd.lvm=0 rd.bootif=0 rd.neednet=0 nomodeset nokaslr proxy.url=<%= foreman_server_url %> proxy.type=foreman BOOTIF=01-${net0/mac} fdi.zips=httpboot/boot/dell-omsa.zip fdi.zipserver=http://${foreman_url}:${port}
+initrd http://${foreman_url}:${port}/httpboot/boot/fdi-image/initrd0.img
 imgstat
 sleep 2
 boot || goto failed
