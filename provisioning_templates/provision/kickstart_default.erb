@@ -60,7 +60,13 @@ https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/in
       network_options.push("--interfacename=vlan#{iface.tag}")
     end
   end
+
+  ignore_usb_disks = host_param('ignore_usb_disks_for_installation') ? true : false
 -%>
+
+<% if (ignore_usb_disks) -%>
+  ignoredisk --drives=/dev/disk/by-path/*usb*
+<% end -%>
 
 <% if (is_fedora && os_major < 29) || (rhel_compatible && os_major <= 7) -%>
 install
@@ -293,4 +299,3 @@ fi
 
 sync
 <%= section_end -%>
-
