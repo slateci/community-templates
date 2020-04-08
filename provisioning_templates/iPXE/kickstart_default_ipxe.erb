@@ -27,6 +27,8 @@ oses:
     static = (@host.token.nil? ? '?' : '&') + static_arg
   end
 
+  options.push("linksleep=#{subnet.nic_delay}") if subnet.nic_delay.present?
+
   stage2 = host_param('kickstart_liveimg') ? 'inst.stage2=' + medium_uri : ''
 
   if (is_fedora && os_major < 17) || (rhel_compatible && os_major < 7)
